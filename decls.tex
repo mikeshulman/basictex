@@ -9,7 +9,7 @@
 \fi
 \iftac\else\usepackage{amsthm}\fi
 \usepackage[all,2cell]{xy}
-\usepackage[neveradjust]{paralist}
+\usepackage{enumitem}
 \usepackage{color}
 \definecolor{darkgreen}{rgb}{0,0.45,0} 
 \usepackage[pagebackref,colorlinks,citecolor=darkgreen,linkcolor=darkgreen]{hyperref}
@@ -181,8 +181,6 @@
 \mdef\ten{\mathrel{\otimes}}
 \let\bigten\bigotimes
 \mdef\sqten{\mathrel{\boxtimes}}
-% \def\pow(#1,#2){\mathop{\pitchfork}(#1,#2)} % powers (maybe) and
-% \def\cpw{\mathop{\odot}}                    % copowers (maybe)
 \def\lt{<}
 \def\gt{>}
 
@@ -443,6 +441,7 @@
 \defthm{conj}{Conjecture}
 \defthm{hyp}{Hypothesis}
 \defthm{fact}{Fact}
+%% TODO: This doesn't work for TAC.
 \iftac\theoremstyle{plain}\else\theoremstyle{definition}\fi
 \defthm{defn}{Definition}
 \defthm{notn}{Notation}
@@ -476,69 +475,6 @@
 % whose tags are specified manually) - uses mathtools.  All equations
 % need to be referenced with \eqref, not \ref, for this to work!
 \@ifpackageloaded{mathtools}{\mathtoolsset{showonlyrefs,showmanualtags}}{}
-
-%% Fix enumerate spacing with paralist.  This has two parts:
-%%   1. enable mixing of "old spacing" lists with those adjusted by paralist
-%%   2. allow us to specify a number based on which to adjust the spacing
-%% For the first, use \killspacingtrue when you want the spacing
-%% adjusted, then \killspacingfalse to turn adjustment off.  For the
-%% second, use \maxenum=14 to set the widest number you want the
-%% spacing to be calculated with.
-\newlength\oldleftmargini       % save old spacing
-\newlength\oldleftmarginii
-\newlength\oldleftmarginiii
-\newlength\oldleftmarginiv
-\newlength\oldleftmarginv
-\newlength\oldleftmarginvi
-\newcount\maxenum
-\maxenum=7
-\newif\ifkillspacing
-\def\@adjust@enum@labelwidth{%
-  \advance\@listdepth by 1\relax
-  \ifkillspacing                % do the paralist thing
-    \csname c@\@enumctr\endcsname\maxenum
-    \settowidth{\@tempdima}{%
-      \csname label\@enumctr\endcsname\hspace{\labelsep}}%
-    \csname leftmargin\romannumeral\@listdepth\endcsname
-      \@tempdima
-  \else                         % otherwise, reset it
-    \csname fixspacing\romannumeral\@listdepth\endcsname
-  \fi
-  \advance\@listdepth by -1\relax}
-% these commands, one for each enum level (I couldn't get a generic
-% one to work), test whether oldleftmargin has been set yet, and if
-% not, set it from leftmargin; otherwise, they reset leftmargin to
-% it.  Just setting oldleftmargin to leftmargin in the preamble
-% doesn't seem to work.
-\def\fixspacingi{\ifnum\oldleftmargini=0\setlength\oldleftmargini\leftmargini\else\setlength\leftmargini\oldleftmargini\fi}
-\def\fixspacingii{\ifnum\oldleftmarginii=0\setlength\oldleftmarginii\leftmarginii\else\setlength\leftmarginii\oldleftmarginii\fi}
-\def\fixspacingiii{\ifnum\oldleftmarginiii=0\setlength\oldleftmarginiii\leftmarginiii\else\setlength\leftmarginiii\oldleftmarginiii\fi}
-\def\fixspacingiv{\ifnum\oldleftmarginiv=0\setlength\oldleftmarginiv\leftmarginiv\else\setlength\leftmarginiv\oldleftmarginiv\fi}
-\def\fixspacingv{\ifnum\oldleftmarginv=0\setlength\oldleftmarginv\leftmarginv\else\setlength\leftmarginv\oldleftmarginv\fi}
-\def\fixspacingvi{\ifnum\oldleftmarginvi=0\setlength\oldleftmarginvi\leftmarginvi\else\setlength\leftmarginvi\oldleftmarginvi\fi}
-
-%% Fix paralist references, so that we can refer to (1) instead of
-%% just 1.
-\def\pl@label#1#2{%
-  \edef\pl@the{\noexpand#1{\@enumctr}}%
-  \pl@lab\expandafter{\the\pl@lab\csname yourthe\@enumctr\endcsname}%
-  \advance\@tempcnta1
-  \pl@loop}
-\def\@enumlabel@#1[#2]{%
-  \@plmylabeltrue
-  \@tempcnta0
-  \pl@lab{}%
-  \let\pl@the\pl@qmark
-  \expandafter\pl@loop\@gobble#2\@@@
-  \ifnum\@tempcnta=1\else
-    \PackageWarning{paralist}{Incorrect label; no or multiple
-      counters.\MessageBreak The label is: \@gobble#2}%
-  \fi
-  \expandafter\edef\csname label\@enumctr\endcsname{\the\pl@lab}%
-  \expandafter\edef\csname the\@enumctr\endcsname{\the\pl@lab}%
-  \expandafter\let\csname yourthe\@enumctr\endcsname\pl@the
-  #1}
-
 
 % GREEK LETTERS, ETC.
 \alwaysmath{alpha}
