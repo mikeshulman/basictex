@@ -1,4 +1,5 @@
 \usepackage{amssymb,amsmath,stmaryrd,mathrsfs}
+
 %% Set this to true before loading if we're using the TAC style file.
 %% Note that eventually, TAC requires everything to be in one source file.
 \def\definetac{\newif\iftac}    % Can't define a \newif inside another \if!
@@ -7,12 +8,26 @@
   %% Guess whether we're using TAC by whether \state is defined.
   \ifx\state\undefined\tacfalse\else\tactrue\fi
 \fi
+
+% Similarly detect beamer
+\def\definebeamer{\newif\ifbeamer}
+\ifx\beamertrue\undefined
+  \definebeamer
+  %% Guess whether we're using Beamer by whether \uncover is defined.
+  \ifx\uncover\undefined\beamerfalse\else\beamertrue\fi
+\fi
+
 \iftac\else\usepackage{amsthm}\fi
 \usepackage[all,2cell]{xy}
+%\UseAllTwocells
+%\usepackage{tikz}
+%\usetikzlibrary{arrows}
 \usepackage{enumitem}
-\usepackage{color}
-\definecolor{darkgreen}{rgb}{0,0.45,0} 
-\usepackage[pagebackref,colorlinks,citecolor=darkgreen,linkcolor=darkgreen]{hyperref}
+\ifbeamer\else
+  \usepackage{color}
+  \definecolor{darkgreen}{rgb}{0,0.45,0} 
+  \usepackage[pagebackref,colorlinks,citecolor=darkgreen,linkcolor=darkgreen]{hyperref}
+\fi
 \usepackage{mathtools}          % for all sorts of things
 \usepackage{graphics}           % for \scalebox, used in \widecheck
 \usepackage{ifmtarg}            % used in \jd
@@ -457,7 +472,6 @@
 \defthm{claim}{Claim}
 \defthm{conj}{Conjecture}
 \defthm{hyp}{Hypothesis}
-\defthm{fact}{Fact}
 %% TODO: This doesn't work for TAC.
 \iftac\theoremstyle{plain}\else\theoremstyle{definition}\fi
 \defthm{defn}{Definition}
@@ -477,8 +491,10 @@
 \def\thmqedhere{\expandafter\csname\csname @currenvir\endcsname @qed\endcsname}
 
 % Number numbered lists as (i), (ii), ...
-\renewcommand{\theenumi}{(\roman{enumi})}
-\renewcommand{\labelenumi}{\theenumi}
+\ifbeamer\else
+  \renewcommand{\theenumi}{(\roman{enumi})}
+  \renewcommand{\labelenumi}{\theenumi}
+\fi
 
 % Also number formulas with the theorem counter
 \iftac

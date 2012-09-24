@@ -8,5 +8,7 @@
 *.log
 *.out
 *.synctex.gz
+*.nav
+*.snm
 auto/*
 *~
