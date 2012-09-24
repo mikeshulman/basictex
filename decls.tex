@@ -120,7 +120,8 @@
 \def\autofmt@t#1\autofmt@end{\widetilde{#1}}
 \def\autofmt@k#1\autofmt@end{\check{#1}}
 
-% Defining multi-letter commands
+% Defining multi-letter commands.  Use this like so:
+% \autodefs{\bSet\cCat\cCAT\kBicat\lProf}
 \def\auto@drop#1{}
 \def\autodef#1{\ea\ea\ea\@autodef\ea\ea\ea#1\ea\auto@drop\string#1\autodef@end}
 \def\@autodef#1#2#3\autodef@end{%
