@@ -2,6 +2,7 @@ This repository contains:
 
 * decls.tex: the basic LaTeX macros that I use in all my papers
 * paper.tex: a sample LaTeX file for the paper itself
+* slides.tex: a similar sample file for making beamer slides
 * all.bib: my master BibTeX database
 
 I generally copy decls.tex into each new LaTeX project (so that future
