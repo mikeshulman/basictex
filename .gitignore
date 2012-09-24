@@ -9,3 +9,4 @@
 *.out
 *.synctex.gz
 auto/*
+*~

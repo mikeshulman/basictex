@@ -14,7 +14,9 @@
 \definecolor{darkgreen}{rgb}{0,0.45,0} 
 \usepackage[pagebackref,colorlinks,citecolor=darkgreen,linkcolor=darkgreen]{hyperref}
 \usepackage{mathtools}          % for all sorts of things
-%\usepackage{graphics,color,epsfig}
+\usepackage{graphics}           % for \scalebox, used in \widecheck
+\usepackage{ifmtarg}            % used in \jd
+%\usepackage{color,epsfig}
 %\usepackage{fullpage}
 %\usepackage{eucal}
 %\usepackage{wasysym}
@@ -32,6 +34,21 @@
 \def\mdef#1#2{\ea\ea\ea\gdef\ea\ea\noexpand#1\ea{\ea\ensuremath\ea{#2}\xspace}}
 \def\alwaysmath#1{\ea\ea\ea\global\ea\ea\ea\let\ea\ea\csname your@#1\endcsname\csname #1\endcsname
   \ea\def\csname #1\endcsname{\ensuremath{\csname your@#1\endcsname}\xspace}}
+
+%% WIDECHECK
+\DeclareRobustCommand\widecheck[1]{{\mathpalette\@widecheck{#1}}}
+\def\@widecheck#1#2{%
+    \setbox\z@\hbox{\m@th$#1#2$}%
+    \setbox\tw@\hbox{\m@th$#1%
+       \widehat{%
+          \vrule\@width\z@\@height\ht\z@
+          \vrule\@height\z@\@width\wd\z@}$}%
+    \dp\tw@-\ht\z@
+    \@tempdima\ht\z@ \advance\@tempdima2\ht\tw@ \divide\@tempdima\thr@@
+    \setbox\tw@\hbox{%
+       \raise\@tempdima\hbox{\scalebox{1}[-1]{\lower\@tempdima\box
+\tw@}}}%
+    {\ooalign{\box\tw@ \cr \box\z@}}}
 
 %% SIMPLE COMMANDS FOR FONTS AND DECORATIONS
 
@@ -59,10 +76,10 @@
 % Blackboard Bold: \lA is \mathbb{A}
 \def\definebb#1{\ea\gdef\csname l#1\endcsname{\ensuremath{\mathbb{#1}}\xspace}}
 \foreachLetter{1}{27}{\definebb}
-% Fraktur: \fa is \mathfrak{a}
-\def\definefrak#1{\ea\gdef\csname f#1\endcsname{\ensuremath{\mathfrak{#1}}\xspace}}
-\foreachletter{1}{9}{\definefrak} % \fi is something else!
-\foreachletter{10}{27}{\definefrak}
+% Fraktur: \ka is \mathfrak{a} (except when it's \kappa, see below), \kA is \mathfrak{A}
+\def\definefrak#1{\ea\gdef\csname k#1\endcsname{\ensuremath{\mathfrak{#1}}\xspace}}
+\foreachletter{1}{27}{\definefrak}
+\foreachLetter{1}{27}{\definefrak}
 % Bar: \Abar is \overline{A}, \abar is \overline{a}
 \def\definebar#1{\ea\gdef\csname #1bar\endcsname{\ensuremath{\overline{#1}}\xspace}}
 \foreachLetter{1}{27}{\definebar}
@@ -77,8 +94,8 @@
 \def\definehat#1{\ea\gdef\csname #1hat\endcsname{\ensuremath{\widehat{#1}}\xspace}}
 \foreachLetter{1}{27}{\definehat}
 \foreachletter{1}{27}{\definehat}
-% Checks: \Achk is \check{A}, \achk is \check{a}
-\def\definechk#1{\ea\gdef\csname #1chk\endcsname{\ensuremath{\check{#1}}\xspace}}
+% Checks: \Achk is \widecheck{A}, \achk is \widecheck{a}
+\def\definechk#1{\ea\gdef\csname #1chk\endcsname{\ensuremath{\widecheck{#1}}\xspace}}
 \foreachLetter{1}{27}{\definechk}
 \foreachletter{1}{27}{\definechk}
 % Underline: \uA is \underline{A}, \ua is \underline{a}
@@ -93,7 +110,8 @@
 \def\autofmt@l#1#2\autofmt@end{\mathbb{#1}\mathsf{#2}}
 \def\autofmt@c#1#2\autofmt@end{\mathcal{#1}\mathit{#2}}
 \def\autofmt@s#1#2\autofmt@end{\mathscr{#1}\mathit{#2}}
-\def\autofmt@f#1\autofmt@end{\mathfrak{#1}}
+\def\autofmt@f#1\autofmt@end{\mathsf{#1}}
+\def\autofmt@k#1\autofmt@end{\mathfrak{#1}}
 % Particular commands for decorations.
 \def\autofmt@u#1\autofmt@end{\underline{\smash{\mathsf{#1}}}}
 \def\autofmt@U#1\autofmt@end{\underline{\underline{\smash{\mathsf{#1}}}}}
@@ -124,10 +142,10 @@
 %% \mathbbb, so as not to replace the usual one.
 \DeclareSymbolFont{bbold}{U}{bbold}{m}{n}
 \DeclareSymbolFontAlphabet{\mathbbb}{bbold}
-\newcommand{\bbDelta}{\ensuremath{\mathbbb{\Delta}}\xspace}
-\newcommand{\bbone}{\ensuremath{\mathbbb{1}}\xspace}
-\newcommand{\bbtwo}{\ensuremath{\mathbbb{2}}\xspace}
-\newcommand{\bbthree}{\ensuremath{\mathbbb{3}}\xspace}
+\newcommand{\lDelta}{\ensuremath{\mathbbb{\Delta}}\xspace}
+\newcommand{\lone}{\ensuremath{\mathbbb{1}}\xspace}
+\newcommand{\ltwo}{\ensuremath{\mathbbb{2}}\xspace}
+\newcommand{\lthree}{\ensuremath{\mathbbb{3}}\xspace}
 
 % greek with bars
 \newcommand{\albar}{\ensuremath{\overline{\alpha}}\xspace}
@@ -161,14 +179,14 @@
 \let\meet\wedge
 \let\join\vee
 \let\dn\downarrow
-\newcommand{\op}{^{\mathit{op}}}
-\newcommand{\co}{^{\mathit{co}}}
-\newcommand{\coop}{^{\mathit{coop}}}
+\newcommand{\op}{^{\mathrm{op}}}
+\newcommand{\co}{^{\mathrm{co}}}
+\newcommand{\coop}{^{\mathrm{coop}}}
 \let\adj\dashv
 \SelectTips{cm}{}
 \newdir{ >}{{}*!/-10pt/@{>}}    % extra spacing for tail arrows in XYpic
-\newcommand{\pushoutcorner}[1][dr]{\save*!/#1+1.2pc/#1:(1,-1)@^{|-}\restore}
-\newcommand{\pullbackcorner}[1][dr]{\save*!/#1-1.2pc/#1:(-1,1)@^{|-}\restore}
+\newcommand{\pushout}[1][dr]{\save*!/#1+1.2pc/#1:(1,-1)@^{|-}\restore}
+\newcommand{\pullback}[1][dr]{\save*!/#1-1.2pc/#1:(-1,1)@^{|-}\restore}
 \let\iso\cong
 \let\eqv\simeq
 \let\cng\equiv
@@ -181,23 +199,8 @@
 \mdef\ten{\mathrel{\otimes}}
 \let\bigten\bigotimes
 \mdef\sqten{\mathrel{\boxtimes}}
-\def\lt{<}
+\def\lt{<}                      % For iTex compatibility
 \def\gt{>}
-
-%% WIDECHECK
-\DeclareRobustCommand\widecheck[1]{{\mathpalette\@widecheck{#1}}}
-\def\@widecheck#1#2{%
-    \setbox\z@\hbox{\m@th$#1#2$}%
-    \setbox\tw@\hbox{\m@th$#1%
-       \widehat{%
-          \vrule\@width\z@\@height\ht\z@
-          \vrule\@height\z@\@width\wd\z@}$}%
-    \dp\tw@-\ht\z@
-    \@tempdima\ht\z@ \advance\@tempdima2\ht\tw@ \divide\@tempdima\thr@@
-    \setbox\tw@\hbox{%
-       \raise\@tempdima\hbox{\scalebox{1}[-1]{\lower\@tempdima\box
-\tw@}}}%
-    {\ooalign{\box\tw@ \cr \box\z@}}}
 
 %% OPERATORS
 \DeclareMathOperator\lan{Lan}
@@ -324,6 +327,19 @@
 \def\Bigsh{\shvar{\Big}}
 \def\biggsh{\shvar{\bigg}}
 \def\Biggsh{\shvar{\Bigg}}
+
+% TYPING JUDGMENTS
+% Call this macro as \jd{x:A, y:B |- c:C}.  It adds (what I think is)
+% appropriate spacing, plus auto-sized parentheses around each typing judgment.
+\def\jd#1{\@jd#1\ej}
+\def\@jd#1|-#2\ej{\@@jd#1,,\;\vdash\;\left(#2\right)}
+\def\@@jd#1,{\@ifmtarg{#1}{\let\next=\relax}{\left(#1\right)\let\next=\@@@jd}\next}
+\def\@@@jd#1,{\@ifmtarg{#1}{\let\next=\relax}{,\,\left(#1\right)\let\next=\@@@jd}\next}
+% Here's a version which puts a line break before the turnstyle.
+\def\jdm#1{\@jdm#1\ej}
+\def\@jdm#1|-#2\ej{\@@jd#1,,\\\vdash\;\left(#2\right)}
+% Make an actual comma that doesn't separate typing judgments (e.g. A,B,C : Type).
+\def\cm{,}
 
 %% SKIPIT in TikZ
 % See http://tex.stackexchange.com/questions/3513/draw-only-some-segments-of-a-path-in-tikz
@@ -528,6 +544,7 @@
 \let\th\theta
 \let\Th\Theta
 \let\vth\vartheta
+\let\Om\Omega
 
 %% Include or exclude solutions
 % This code is basically copied from version.sty, except that when the
