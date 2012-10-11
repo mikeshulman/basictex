@@ -95,6 +95,12 @@
 \def\definefrak#1{\ea\gdef\csname k#1\endcsname{\ensuremath{\mathfrak{#1}}\xspace}}
 \foreachletter{1}{27}{\definefrak}
 \foreachLetter{1}{27}{\definefrak}
+% Sans serif
+\def\definesf#1{\ea\gdef\csname i#1\endcsname{\ensuremath{\mathsf{#1}}\xspace}}
+\foreachletter{1}{6}{\definesf}
+\foreachletter{7}{14}{\definesf}
+\foreachletter{15}{27}{\definesf}
+\foreachLetter{1}{27}{\definesf}
 % Bar: \Abar is \overline{A}, \abar is \overline{a}
 \def\definebar#1{\ea\gdef\csname #1bar\endcsname{\ensuremath{\overline{#1}}\xspace}}
 \foreachLetter{1}{27}{\definebar}
