@@ -497,6 +497,10 @@
   \renewcommand{\labelenumi}{\theenumi}
 \fi
 
+% Left margins for enumitem
+\setitemize[1]{leftmargin=2em}
+\setenumerate[1]{leftmargin=*}
+
 % Also number formulas with the theorem counter
 \iftac
   \let\c@equation\c@subsection
