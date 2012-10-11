@@ -22,8 +22,8 @@
 %\UseAllTwocells
 %\usepackage{tikz}
 %\usetikzlibrary{arrows}
-\usepackage{enumitem}
 \ifbeamer\else
+  \usepackage{enumitem}
   \usepackage{color}
   \definecolor{darkgreen}{rgb}{0,0.45,0} 
   \usepackage[pagebackref,colorlinks,citecolor=darkgreen,linkcolor=darkgreen]{hyperref}
@@ -260,6 +260,7 @@
 \let\cohto\rightsquigarrow
 \let\maps\colon
 \newcommand{\spam}{\,:\!}       % \maps for left arrows
+\def\acof{\mathrel{\mathrlap{\hspace{3pt}\raisebox{4pt}{$\scriptscriptstyle\sim$}}\mathord{\rightarrowtail}}}
 
 % diagxy redefines \to, along with \toleft, \two, \epi, and \mon.
 
@@ -495,6 +496,10 @@
   \renewcommand{\theenumi}{(\roman{enumi})}
   \renewcommand{\labelenumi}{\theenumi}
 \fi
+
+% Left margins for enumitem
+\setitemize[1]{leftmargin=2em}
+\setenumerate[1]{leftmargin=*}
 
 % Also number formulas with the theorem counter
 \iftac
