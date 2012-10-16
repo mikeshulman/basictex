@@ -233,7 +233,7 @@
 \DeclareMathOperator\Tot{Tot}
 \DeclareMathOperator\cosk{cosk}
 \DeclareMathOperator\sk{sk}
-\DeclareMathOperator\im{im}
+%\DeclareMathOperator\im{im}
 \DeclareMathOperator\Spec{Spec}
 \DeclareMathOperator\Ho{Ho}
 \DeclareMathOperator\Aut{Aut}
@@ -504,8 +504,10 @@
 \fi
 
 % Left margins for enumitem
-\setitemize[1]{leftmargin=2em}
-\setenumerate[1]{leftmargin=*}
+\ifbeamer\else
+  \setitemize[1]{leftmargin=2em}
+  \setenumerate[1]{leftmargin=*}
+\fi
 
 % Also number formulas with the theorem counter
 \iftac
