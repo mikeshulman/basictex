@@ -399,9 +399,11 @@
   %% in any case.  We also have to hook into the \state macros instead
   %% of \@thm since those are what know about the current theorem type.
   \let\your@state\state
-  \def\state#1{\gdef\currthmtype{#1}\your@state{#1}}
+  \def\state#1{\my@state#1}
+  \def\my@state#1.{\gdef\currthmtype{#1}\your@state{#1.}}
   \let\your@staterm\staterm
-  \def\staterm#1{\gdef\currthmtype{#1}\your@staterm{#1}}
+  \def\staterm#1{\my@staterm#1}
+  \def\my@staterm#1.{\gdef\currthmtype{#1}\your@staterm{#1.}}
   \let\defthm\newtheorem
   % Start out \currthmtype as empty
   \def\currthmtype{}
