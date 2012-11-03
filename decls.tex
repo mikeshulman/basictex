@@ -405,6 +405,7 @@
   \def\staterm#1{\my@staterm#1}
   \def\my@staterm#1.{\gdef\currthmtype{#1}\your@staterm{#1.}}
   \let\defthm\newtheorem
+  \def\switchtotheoremrm{\let\defthm\newtheoremrm}
   % Start out \currthmtype as empty
   \def\currthmtype{}
   % In a bit, we're going to redefine \label so that \label{athm} will
@@ -481,11 +482,10 @@
 \defthm{claim}{Claim}
 \defthm{conj}{Conjecture}
 \defthm{hyp}{Hypothesis}
-%% TODO: This doesn't work for TAC.
-\iftac\theoremstyle{plain}\else\theoremstyle{definition}\fi
+\iftac\switchtotheoremrm\else\theoremstyle{definition}\fi
 \defthm{defn}{Definition}
 \defthm{notn}{Notation}
-\iftac\theoremstyle{plain}\else\theoremstyle{remark}\fi
+\iftac\switchtotheoremrm\else\theoremstyle{remark}\fi
 \defthm{rmk}{Remark}
 \defthm{eg}{Example}
 \defthm{egs}{Examples}
