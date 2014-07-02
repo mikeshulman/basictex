@@ -393,10 +393,6 @@
 %% TODO: This \autoref in TAC doesn't work with figures (and anything
 %% else other than theorems).
 
-%% Also TODO: TAC's {proof} environment always inserts "Proof" at the
-%% beginning even when you give it an [argument], unlike the AMS
-%% {proof} environment.
-
 %%%% THEOREM-TYPE ENVIRONMENTS, hacked to
 %%% (a) number all with the same numbers, and
 %%% (b) have the right names.
@@ -505,6 +501,19 @@
 \defthm{egs}{Examples}
 \defthm{ex}{Exercise}
 \defthm{ceg}{Counterexample}
+
+% \qedhere for TAC
+\iftac
+  \let\your@endproof\endproof
+  \def\my@endproof{\your@endproof}
+  \def\endproof{\my@endproof\gdef\my@endproof{\your@endproof}}
+  \def\qedhere{\tag*{\endproofbox}\gdef\my@endproof{\relax}}
+\fi
+
+% Make the optional arguments to TAC's \proof behave like everyone else's
+\iftac
+  \def\pr@@f[#1]{\subsubsection*{\sc #1.}}
+\fi
 
 % How to get QED symbols inside equations at the end of the statements
 % of theorems.  AMS LaTeX knows how to do this inside equations at the
