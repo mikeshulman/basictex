@@ -17,6 +17,14 @@
   \ifx\uncover\undefined\beamerfalse\else\beamertrue\fi
 \fi
 
+% And cleveref
+\def\definecref{\newif\ifcref}
+\ifx\creftrue\undefined
+  \definecref
+  % Default to false
+  \creffalse
+\fi
+
 \iftac\else\usepackage{amsthm}\fi
 \usepackage[all,2cell]{xy}
 %\UseAllTwocells
@@ -42,6 +50,7 @@
 \usepackage{url}                % for citations to web sites
 \usepackage{xspace}             % put spaces after a \command in text
 %\usepackage{cite}               % compress and sort grouped citations (only use with numbered citations)
+\ifcref\usepackage{cleveref,aliascnt}\fi
 
 %% If you want to use biblatex, e.g. if a journal requires (Author name YEAR) citations.
 % \usepackage[style=authoryear,
@@ -414,8 +423,9 @@
   \let\your@staterm\staterm
   \def\staterm#1{\my@staterm#1}
   \def\my@staterm#1.{\gdef\currthmtype{#1}\your@staterm{#1.}}
-  \let\defthm\newtheorem
-  \def\switchtotheoremrm{\let\defthm\newtheoremrm}
+  \let\@defthm\newtheorem
+  \def\switchtotheoremrm{\let\@defthm\newtheoremrm}
+  \def\defthm#1#2#3{\@defthm#1#2} % Ignore the third argument (for cleveref only)
   % Start out \currthmtype as empty
   \def\currthmtype{}
   % In a bit, we're going to redefine \label so that \label{athm} will
@@ -440,15 +450,27 @@
         \old@label{label@name@#1}}%
       \old@label{#1}}
   }
+  \let\cref\autoref
+\else\ifcref
+  % Cleveref does most of it for us.
+  \def\defthm#1#2#3{%
+    %% Ensure all theorem types are numbered with the same counter
+    \newaliascnt{#1}{thm}
+    \newtheorem{#1}[#1]{#2}
+    \aliascntresetthe{#1}
+    %% This command tells cleveref's \cref what to call things
+    \crefname{#1}{#2}{#3}% following brace must be on separate line to support poorman cleveref sed file
+  }
+  % \let\autoref\cref  % May want to use \autoref for xr-ed links
 \else
-  % In non-TAC styles, theorems have their own counters and so the
+  % In non-TAC styles without cleveref, theorems have their own counters and so the
   % hyperref \autoref works, if hyperref is loaded.
   \ifhyperref
     %% If we have hyperref, then we have to make sure all the theorem
     %% types appear to use different counters so that hyperref can tell
     %% them apart.  However, we want them actually to use the same
     %% counter, so we don't have both Theorem 9.1 and Definition 9.1.
-    \def\defthm#1#2{%
+    \def\defthm#1#2#3{% Ignore the third argument (for cleveref only)
       %% All types of theorems are number inside sections
       \newtheorem{#1}{#2}[section]%
       %% This command tells hyperref's \autoref what to call things
@@ -459,7 +481,7 @@
     %% Without hyperref, we have to roll our own.  This code is due to
     %% Mike Mandell.  First, all theorems can now "officially" use the
     %% same counter.
-    \def\defthm#1#2{\newtheorem{#1}[thm]{#2}}
+    \def\defthm#1#2#3{\newtheorem{#1}[thm]{#2}} % Ignore the third argument (for cleveref only)
     %% Save the label- and theorem-making commands
     \ifx\SK@label\undefined\let\SK@label\label\fi
     \let\old@label\label
@@ -477,30 +499,61 @@
     %% Now \autoref just looks at "athm@" instead of "athm."
     \def\autoref#1{\ref{#1@}}
   \fi
-\fi
+  \let\cref\autoref
+\fi\fi
 
 %% Now the code that works in all cases.  Note that TAC allows the
 %% optional arguments, but ignores them.  It also defines environments
 %% called "theorem," etc.
 \newtheorem{thm}{Theorem}[section]
-\newcommand{\thmautorefname}{Theorem}
-\defthm{cor}{Corollary}
-\defthm{prop}{Proposition}
-\defthm{lem}{Lemma}
-\defthm{sch}{Scholium}
-\defthm{assume}{Assumption}
-\defthm{claim}{Claim}
-\defthm{conj}{Conjecture}
-\defthm{hyp}{Hypothesis}
+\ifcref
+  \crefname{thm}{Theorem}{Theorems}
+\else
+  \newcommand{\thmautorefname}{Theorem}
+\fi
+\defthm{cor}{Corollary}{Corollaries}
+\defthm{prop}{Proposition}{Propositions}
+\defthm{lem}{Lemma}{Lemmas}
+\defthm{sch}{Scholium}{Scholia}
+\defthm{assume}{Assumption}{Assumptions}
+\defthm{claim}{Claim}{Claims}
+\defthm{conj}{Conjecture}{Conjectures}
+\defthm{hyp}{Hypothesis}{Hypotheses}
 \iftac\switchtotheoremrm\else\theoremstyle{definition}\fi
-\defthm{defn}{Definition}
-\defthm{notn}{Notation}
+\defthm{defn}{Definition}{Definitions}
+\defthm{notn}{Notation}{Notations}
 \iftac\switchtotheoremrm\else\theoremstyle{remark}\fi
-\defthm{rmk}{Remark}
-\defthm{eg}{Example}
-\defthm{egs}{Examples}
-\defthm{ex}{Exercise}
-\defthm{ceg}{Counterexample}
+\defthm{rmk}{Remark}{Remarks}
+\defthm{eg}{Example}{Examples}
+\defthm{egs}{Examples}{Examples}
+\defthm{ex}{Exercise}{Exercises}
+\defthm{ceg}{Counterexample}{Counterexamples}
+
+\ifcref
+  % Display format for sections
+  \crefformat{section}{\S#2#1#3}
+  \Crefformat{section}{Section~#2#1#3}
+  \crefrangeformat{section}{\S\S#3#1#4--#5#2#6}
+  \Crefrangeformat{section}{Sections~#3#1#4--#5#2#6}
+  \crefmultiformat{section}{\S\S#2#1#3}{ and~#2#1#3}{, #2#1#3}{ and~#2#1#3}
+  \Crefmultiformat{section}{Sections~#2#1#3}{ and~#2#1#3}{, #2#1#3}{ and~#2#1#3}
+  \crefrangemultiformat{section}{\S\S#3#1#4--#5#2#6}{ and~#3#1#4--#5#2#6}{, #3#1#4--#5#2#6}{ and~#3#1#4--#5#2#6}
+  \Crefrangemultiformat{section}{Sections~#3#1#4--#5#2#6}{ and~#3#1#4--#5#2#6}{, #3#1#4--#5#2#6}{ and~#3#1#4--#5#2#6}
+  % Display format for appendices
+  \crefformat{appendix}{Appendix~#2#1#3}
+  \Crefformat{appendix}{Appendix~#2#1#3}
+  \crefrangeformat{appendix}{Appendices~#3#1#4--#5#2#6}
+  \Crefrangeformat{appendix}{Appendices~#3#1#4--#5#2#6}
+  \crefmultiformat{appendix}{Appendices~#2#1#3}{ and~#2#1#3}{, #2#1#3}{ and~#2#1#3}
+  \Crefmultiformat{appendix}{Appendices~#2#1#3}{ and~#2#1#3}{, #2#1#3}{ and~#2#1#3}
+  \crefrangemultiformat{appendix}{Appendices~#3#1#4--#5#2#6}{ and~#3#1#4--#5#2#6}{, #3#1#4--#5#2#6}{ and~#3#1#4--#5#2#6}
+  \Crefrangemultiformat{appendix}{Appendices~#3#1#4--#5#2#6}{ and~#3#1#4--#5#2#6}{, #3#1#4--#5#2#6}{ and~#3#1#4--#5#2#6}
+  % Display format for parts
+  \crefname{part}{Part}{Parts}
+  % Display format for figures
+  \crefname{figure}{Figure}{Figures}
+\fi
+
 
 % \qedhere for TAC
 \iftac
@@ -545,7 +598,9 @@
 % Only show numbers for equations that are actually referenced (or
 % whose tags are specified manually) - uses mathtools.  All equations
 % need to be referenced with \eqref, not \ref, for this to work!
-\@ifpackageloaded{mathtools}{\mathtoolsset{showonlyrefs,showmanualtags}}{}
+\ifcref\else
+  \@ifpackageloaded{mathtools}{\mathtoolsset{showonlyrefs,showmanualtags}}{}
+\fi
 
 % GREEK LETTERS, ETC.
 \alwaysmath{alpha}
