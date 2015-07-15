@@ -241,6 +241,7 @@
 \mdef\id{\mathrm{id}}
 \alwaysmath{ell}
 \alwaysmath{infty}
+\let\oo\infty
 \alwaysmath{odot}
 \def\frc#1/#2.{\frac{#1}{#2}}   % \frc x^2+1 / x^2-1 .
 \mdef\ten{\mathrel{\otimes}}
@@ -559,6 +560,7 @@
 
 % \qedhere for TAC
 \iftac
+  \let\qed\endproof
   \let\your@endproof\endproof
   \def\my@endproof{\your@endproof}
   \def\endproof{\my@endproof\gdef\my@endproof{\your@endproof}}
