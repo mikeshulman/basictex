@@ -34,7 +34,7 @@
   \usepackage{enumitem}
   \usepackage{xcolor}
   \definecolor{darkgreen}{rgb}{0,0.45,0} 
-  \usepackage[pagebackref,colorlinks,citecolor=darkgreen,linkcolor=darkgreen]{hyperref}
+  \iftac\else\usepackage[pagebackref,colorlinks,citecolor=darkgreen,linkcolor=darkgreen]{hyperref}\fi
 \fi
 \usepackage{mathtools}          % for all sorts of things
 \usepackage{graphics}           % for \scalebox, used in \widecheck
@@ -428,7 +428,7 @@
   \def\my@staterm#1.{\gdef\currthmtype{#1}\your@staterm{#1.}}
   \let\@defthm\newtheorem
   \def\switchtotheoremrm{\let\@defthm\newtheoremrm}
-  \def\defthm#1#2#3{\@defthm#1#2} % Ignore the third argument (for cleveref only)
+  \def\defthm#1#2#3{\@defthm{#1}{#2}} % Ignore the third argument (for cleveref only)
   % Start out \currthmtype as empty
   \def\currthmtype{}
   % In a bit, we're going to redefine \label so that \label{athm} will
