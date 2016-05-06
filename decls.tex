@@ -111,14 +111,15 @@
 % Bold: \bA is \mathbf{A}
 \def\definebold#1{\ea\gdef\csname b#1\endcsname{\ensuremath{\mathbf{#1}}\xspace}}
 \foreachLetter{1}{27}{\definebold}
-% Blackboard Bold: \lA is \mathbb{A}
-\def\definebb#1{\ea\gdef\csname l#1\endcsname{\ensuremath{\mathbb{#1}}\xspace}}
+% Blackboard Bold: \dA is \mathbb{A}
+\def\definebb#1{\ea\gdef\csname d#1\endcsname{\ensuremath{\mathbb{#1}}\xspace}}
 \foreachLetter{1}{27}{\definebb}
-% Fraktur: \ka is \mathfrak{a} (except when it's \kappa, see below), \kA is \mathfrak{A}
-\def\definefrak#1{\ea\gdef\csname k#1\endcsname{\ensuremath{\mathfrak{#1}}\xspace}}
-\foreachletter{1}{27}{\definefrak}
+% Fraktur: \fa is \mathfrak{a}, except for \fi; \fA is \mathfrak{A}
+\def\definefrak#1{\ea\gdef\csname f#1\endcsname{\ensuremath{\mathfrak{#1}}\xspace}}
+\foreachletter{1}{9}{\definefrak}
+\foreachletter{10}{27}{\definefrak}
 \foreachLetter{1}{27}{\definefrak}
-% Sans serif
+% Sans serif: \ia is \mathsf{a}, except for \if and \in
 \def\definesf#1{\ea\gdef\csname i#1\endcsname{\ensuremath{\mathsf{#1}}\xspace}}
 \foreachletter{1}{6}{\definesf}
 \foreachletter{7}{14}{\definesf}
@@ -151,7 +152,7 @@
 % different.
 \def\autofmt@n#1\autofmt@end{\mathrm{#1}}
 \def\autofmt@b#1\autofmt@end{\mathbf{#1}}
-\def\autofmt@l#1#2\autofmt@end{\mathbb{#1}\mathsf{#2}}
+\def\autofmt@d#1#2\autofmt@end{\mathbb{#1}\mathsf{#2}}
 \def\autofmt@c#1#2\autofmt@end{\mathcal{#1}\mathit{#2}}
 \def\autofmt@s#1#2\autofmt@end{\mathscr{#1}\mathit{#2}}
 \def\autofmt@f#1\autofmt@end{\mathsf{#1}}
@@ -187,10 +188,10 @@
 %% \mathbbb, so as not to replace the usual one.
 \DeclareSymbolFont{bbold}{U}{bbold}{m}{n}
 \DeclareSymbolFontAlphabet{\mathbbb}{bbold}
-\newcommand{\lDelta}{\ensuremath{\mathbbb{\Delta}}\xspace}
-\newcommand{\lone}{\ensuremath{\mathbbb{1}}\xspace}
-\newcommand{\ltwo}{\ensuremath{\mathbbb{2}}\xspace}
-\newcommand{\lthree}{\ensuremath{\mathbbb{3}}\xspace}
+\newcommand{\dDelta}{\ensuremath{\mathbbb{\Delta}}\xspace}
+\newcommand{\done}{\ensuremath{\mathbbb{1}}\xspace}
+\newcommand{\dtwo}{\ensuremath{\mathbbb{2}}\xspace}
+\newcommand{\dthree}{\ensuremath{\mathbbb{3}}\xspace}
 
 % greek with bars
 \newcommand{\albar}{\ensuremath{\overline{\alpha}}\xspace}
