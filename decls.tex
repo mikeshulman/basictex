@@ -430,6 +430,11 @@
   \let\@defthm\newtheorem
   \def\switchtotheoremrm{\let\@defthm\newtheoremrm}
   \def\defthm#1#2#3{\@defthm{#1}{#2}} % Ignore the third argument (for cleveref only)
+  % The following allows us to use \cref for sections too, as if it
+  % were cleveref.  (But not for subsections, and also not for
+  % multiple references at once.)
+  \let\your@section\section
+  \def\section{\gdef\currthmtype{section}\your@section}
   % Start out \currthmtype as empty
   \def\currthmtype{}
   % In a bit, we're going to redefine \label so that \label{athm} will
