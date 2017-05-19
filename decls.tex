@@ -36,6 +36,13 @@
   \definecolor{darkgreen}{rgb}{0,0.45,0} 
   \iftac\else\usepackage[pagebackref,colorlinks,citecolor=darkgreen,linkcolor=darkgreen]{hyperref}\fi
 \fi
+\renewcommand*{\backref}[1]{}
+\renewcommand*{\backrefalt}[4]{({%
+    \ifcase #1 Not cited.%
+          \or On p.~#2%
+          \else On pp.~#2%
+    \fi%
+    })}
 \usepackage{mathtools}          % for all sorts of things
 \usepackage{graphics}           % for \scalebox, used in \widecheck
 \usepackage{ifmtarg}            % used in \jd
