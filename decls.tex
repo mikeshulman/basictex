@@ -26,10 +26,10 @@
 \fi
 
 \iftac\else\usepackage{amsthm}\fi
-\usepackage[all,2cell]{xy}
+%\usepackage[all,2cell]{xy}
 %\UseAllTwocells
-%\usepackage{tikz}
-%\usetikzlibrary{arrows}
+\usepackage{tikz,tikz-cd}
+\usetikzlibrary{arrows}
 \ifbeamer\else
   \usepackage{enumitem}
   \usepackage{xcolor}
@@ -58,6 +58,9 @@
 \usepackage{xspace}             % put spaces after a \command in text
 %\usepackage{cite}               % compress and sort grouped citations (only use with numbered citations)
 \ifcref\usepackage{cleveref,aliascnt}\fi
+\usepackage[status=draft,author=]{fixme}
+\fxusetheme{color}
+\usepackage{mathpartir}
 
 %% If you want to use biblatex, e.g. if a journal requires (Author name YEAR) citations.
 % \usepackage[style=authoryear,
@@ -236,12 +239,6 @@
 \newcommand{\co}{^{\mathrm{co}}}
 \newcommand{\coop}{^{\mathrm{coop}}}
 \let\adj\dashv
-\SelectTips{cm}{}
-\newdir{ >}{{}*!/-10pt/\dir{>}}    % extra spacing for tail arrows in XYpic
-\makeatother
-\newcommand{\pushout}[1][dr]{\save*!/#1+1.2pc/#1:(1,-1)@^{|-}\restore}
-\newcommand{\pullback}[1][dr]{\save*!/#1-1.2pc/#1:(-1,1)@^{|-}\restore}
-\makeatletter
 \let\iso\cong
 \let\eqv\simeq
 \let\cng\equiv
@@ -257,6 +254,65 @@
 \mdef\sqten{\mathrel{\boxtimes}}
 \def\lt{<}                      % For iTex compatibility
 \def\gt{>}
+
+%%% Blanks (shorthand for lambda abstractions)
+\newcommand{\blank}{\mathord{\hspace{1pt}\text{--}\hspace{1pt}}}
+%%% Nameless objects
+\newcommand{\nameless}{\mathord{\hspace{1pt}\underline{\hspace{1ex}}\hspace{1pt}}}
+
+%% Get some new symbols from mathabx, without changing the old ones by
+%% importing the package.  Font declaration copied from mathabx.sty:
+\DeclareFontFamily{U}{mathb}{\hyphenchar\font45}
+\DeclareFontShape{U}{mathb}{m}{n}{
+      <5> <6> <7> <8> <9> <10> gen * mathb
+      <10.95> mathb10 <12> <14.4> <17.28> <20.74> <24.88> mathb12
+      }{}
+\DeclareSymbolFont{mathb}{U}{mathb}{m}{n}
+\DeclareFontSubstitution{U}{mathb}{m}{n}
+%% And now the symbols we want, copied from mathabx.dcl
+\DeclareMathSymbol{\dotplus}       {2}{mathb}{"00}% name to be checked
+\DeclareMathSymbol{\dotdiv}        {2}{mathb}{"01}% name to be checked
+\DeclareMathSymbol{\dottimes}      {2}{mathb}{"02}% name to be checked
+\DeclareMathSymbol{\divdot}        {2}{mathb}{"03}% name to be checked
+\DeclareMathSymbol{\udot}          {2}{mathb}{"04}% name to be checked
+\DeclareMathSymbol{\square}        {2}{mathb}{"05}% name to be checked
+\DeclareMathSymbol{\Asterisk}      {2}{mathb}{"06}
+\DeclareMathSymbol{\bigast}        {1}{mathb}{"06}
+\DeclareMathSymbol{\coAsterisk}    {2}{mathb}{"07}
+\DeclareMathSymbol{\bigcoast}      {1}{mathb}{"07}
+\DeclareMathSymbol{\circplus}      {2}{mathb}{"08}% name to be checked
+\DeclareMathSymbol{\pluscirc}      {2}{mathb}{"09}% name to be checked
+\DeclareMathSymbol{\convolution}   {2}{mathb}{"0A}% name to be checked
+\DeclareMathSymbol{\divideontimes} {2}{mathb}{"0B}% name to be checked
+\DeclareMathSymbol{\blackdiamond}  {2}{mathb}{"0C}% name to be checked
+\DeclareMathSymbol{\sqbullet}      {2}{mathb}{"0D}% name to be checked
+\DeclareMathSymbol{\bigstar}       {2}{mathb}{"0E}
+\DeclareMathSymbol{\bigvarstar}    {2}{mathb}{"0F}
+\DeclareMathSymbol{\corresponds}   {3}{mathb}{"1D}% name to be checked
+\DeclareMathSymbol{\updownarrows}          {3}{mathb}{"D6}
+\DeclareMathSymbol{\downuparrows}          {3}{mathb}{"D7}
+\DeclareMathSymbol{\Lsh}                   {3}{mathb}{"E8}
+\DeclareMathSymbol{\Rsh}                   {3}{mathb}{"E9}
+\DeclareMathSymbol{\dlsh}                  {3}{mathb}{"EA}
+\DeclareMathSymbol{\drsh}                  {3}{mathb}{"EB}
+\DeclareMathSymbol{\looparrowdownleft}     {3}{mathb}{"EE}
+\DeclareMathSymbol{\looparrowdownright}    {3}{mathb}{"EF}
+% \DeclareMathSymbol{\curvearrowleft}        {3}{mathb}{"F0}
+% \DeclareMathSymbol{\curvearrowright}       {3}{mathb}{"F1}
+\DeclareMathSymbol{\curvearrowleftright}   {3}{mathb}{"F2}
+\DeclareMathSymbol{\curvearrowbotleft}     {3}{mathb}{"F3}
+\DeclareMathSymbol{\curvearrowbotright}    {3}{mathb}{"F4}
+\DeclareMathSymbol{\curvearrowbotleftright}{3}{mathb}{"F5}
+% \DeclareMathSymbol{\circlearrowleft}       {3}{mathb}{"F6}
+% \DeclareMathSymbol{\circlearrowright}      {3}{mathb}{"F7}
+\DeclareMathSymbol{\leftsquigarrow}        {3}{mathb}{"F8}
+\DeclareMathSymbol{\rightsquigarrow}       {3}{mathb}{"F9}
+\DeclareMathSymbol{\leftrightsquigarrow}   {3}{mathb}{"FA}
+\DeclareMathSymbol{\lefttorightarrow}      {3}{mathb}{"FC}
+\DeclareMathSymbol{\righttoleftarrow}      {3}{mathb}{"FD}
+\DeclareMathSymbol{\uptodownarrow}         {3}{mathb}{"FE}
+\DeclareMathSymbol{\downtouparrow}         {3}{mathb}{"FF}
+\DeclareMathSymbol{\varhash}       {0}{mathb}{"23}
 
 %% OPERATORS
 \DeclareMathOperator\lan{Lan}
@@ -409,6 +465,33 @@
 \newif\if@skip
 \newcommand{\skipit}[1]{\if@skip\else#1\fi}
 \newcommand{\drawfill}[1][]{\my@drawfill{#1}}
+
+%% TWOCELLS AND PULLBACKS in TIKZ-CD
+\newcounter{nodemaker}
+\setcounter{nodemaker}{0}
+\newcommand{\twocell}[2][]{%
+  \global\edef\mynodeone{twocell\arabic{nodemaker}}%
+  \stepcounter{nodemaker}%
+  \global\edef\mynodetwo{twocell\arabic{nodemaker}}%
+  \stepcounter{nodemaker}%
+  \ar[#2,phantom,shift left=3,""{name=\mynodeone}]%
+  \ar[#2,phantom,shift right=3,""'{name=\mynodetwo}]%
+  \ar[Rightarrow,from=\mynodeone,to=\mynodetwo,"{#1}"]%
+}
+\newcommand{\twocellop}[2][]{%
+  \global\edef\mynodeone{twocell\arabic{nodemaker}}%
+  \stepcounter{nodemaker}%
+  \global\edef\mynodetwo{twocell\arabic{nodemaker}}%
+  \stepcounter{nodemaker}%
+  \ar[#2,phantom,shift left=3,""{name=\mynodeone}]%
+  \ar[#2,phantom,shift right=3,""'{name=\mynodetwo}]%
+  \ar[Rightarrow,from=\mynodetwo,to=\mynodeone,"{#1}"]%
+}
+\newcommand{\drpullback}[1][dr]{\ar[#1,phantom,near start,"\lrcorner"]}
+\newcommand{\dlpullback}[1][dl]{\ar[#1,phantom,near start,"\llcorner"]}
+\newcommand{\urpullback}[1][ur]{\ar[#1,phantom,near start,"\urcorner"]}
+\newcommand{\ulpullback}[1][ul]{\ar[#1,phantom,near start,"\ulcorner"]}
+
 
 %% TODO: This \autoref in TAC doesn't work with figures (and anything
 %% else other than theorems).
