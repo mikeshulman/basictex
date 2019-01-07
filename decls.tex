@@ -34,14 +34,14 @@
   \usepackage{enumitem}
   \usepackage{xcolor}
   \definecolor{darkgreen}{rgb}{0,0.45,0} 
-  \iftac\else\usepackage[pagebackref,colorlinks,citecolor=darkgreen,linkcolor=darkgreen]{hyperref}\fi
+  \iftac\else\usepackage[pagebackref,colorlinks,citecolor=darkgreen,linkcolor=darkgreen]{hyperref}
   \renewcommand*{\backref}[1]{}
   \renewcommand*{\backrefalt}[4]{({%
       \ifcase #1 Not cited.%
             \or On p.~#2%
             \else On pp.~#2%
       \fi%
-    })}
+    })}\fi
 \fi
 \usepackage{mathtools}          % for all sorts of things
 %\usepackage{graphics}
@@ -63,7 +63,9 @@
 \usepackage{mathpartir}
 
 %% If you want to use biblatex, e.g. if a journal requires (Author name YEAR) citations.
+%% You also need to remove the pagebackref option and \backref commands above.
 % \usepackage[style=authoryear,
+%  backend=biber, bibencoding=utf8,
 %  backref=true,
 %  maxnames=4,
 %  maxbibnames=99,
@@ -324,6 +326,7 @@
 \DeclareMathOperator\ran{Ran}
 \DeclareMathOperator\colim{colim}
 \DeclareMathOperator\coeq{coeq}
+\DeclareMathOperator\ob{ob}
 \DeclareMathOperator\eq{eq}
 \DeclareMathOperator\Tot{Tot}
 \DeclareMathOperator\cosk{cosk}
@@ -458,6 +461,22 @@
 \def\@jdm#1|-#2\ej{\@@jd#1,,\\\vdash\;\left(#2\right)}
 % Make an actual comma that doesn't separate typing judgments (e.g. A,B,C : Type).
 \def\cm{,}
+
+% 2-(CO)MONAD STUFF
+\def\alg{\text{-}\mathcal{A}\mathit{lg}}
+\def\algs{\text{-}\mathcal{A}\mathit{lg}_s}
+\def\algl{\text{-}\mathcal{A}\mathit{lg}_l}
+\def\algc{\text{-}\mathcal{A}\mathit{lg}_c}
+\def\algw{\text{-}\mathcal{A}\mathit{lg}_w}
+\def\psalg{\text{-}\mathcal{P}\mathit{s}\mathcal{A}\mathit{lg}}
+\def\dalg{\text{-}\mathbb{A}\mathsf{lg}}
+\def\coalg{\text{-}\mathcal{C}\mathit{oalg}}
+\def\coalgs{\text{-}\mathcal{C}\mathit{oalg}_s}
+\def\coalgl{\text{-}\mathcal{C}\mathit{oalg}_l}
+\def\coalgc{\text{-}\mathcal{C}\mathit{oalg}_c}
+\def\coalgw{\text{-}\mathcal{C}\mathit{oalg}_w}
+\def\pscoalg{\text{-}\mathcal{P}\mathit{s}\mathcal{C}\mathit{oalg}}
+\def\dcoalg{\text{-}\mathbb{C}\mathsf{oalg}}
 
 %% SKIPIT in TikZ
 % See http://tex.stackexchange.com/questions/3513/draw-only-some-segments-of-a-path-in-tikz
