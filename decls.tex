@@ -249,6 +249,11 @@
 %%% Nameless objects
 \newcommand{\nameless}{\mathord{\hspace{1pt}\underline{\hspace{1ex}}\hspace{1pt}}}
 
+% Hiragana "yo" for the Yoneda embedding, from https://arxiv.org/abs/1506.08870
+\DeclareFontFamily{U}{min}{}
+\DeclareFontShape{U}{min}{m}{n}{<-> udmj30}{}
+\newcommand{\yon}{\!\text{\usefont{U}{min}{m}{n}\symbol{'210}}\!}
+
 %% Get some new symbols from mathabx, without changing the old ones by
 %% importing the package.  Font declarations copied from mathabx.sty:
 \DeclareFontFamily{U}{mathb}{\hyphenchar\font45}
