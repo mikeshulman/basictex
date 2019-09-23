@@ -1,4 +1,4 @@
-""@Book{streicher:semtt,
+@Book{streicher:semtt,
   author = 	 {Thomas Streicher},
   title = 	 {Semantics of type theory: correctness, completeness, and independence results},
   publisher = 	 {Birkh\"auser},
@@ -1847,7 +1847,7 @@ journal = {Proceedings of the London Mathematical Society}
   mrreviewer = {Timothy Porter}
 }
 
-@ARTICLE{MR1919591,
+@ARTICLE{birkedal:gen-realiz,
   author = {Birkedal, Lars},
   title = {A general notion of realizability},
   journal = {Bull. Symbolic Logic},
@@ -3811,13 +3811,16 @@ journal = {Proceedings of the London Mathematical Society}
   mrreviewer = {Giordano Favi}
 }
 
-@unpublished{ds:quantum,
+@InCollection{ds:quantum,
   author = {Brian Day and Ross Street},
   title = {Quantum categories, star autonomy, and quantum groupoids},
-  year = {2007},
   note = {arXiv:math/0301209},
-  oai2identifier = {math/0301209}
-}
+	booktitle = 	 {Galois Theory,  Hopf  Algebras,  and  Semiabelian  Categories},
+	publisher = {American Math. Soc.},
+	year = 		 2004,
+	volume = 	 43,
+	series = 	 {Fields  Institute  Communications},
+	pages = 		 {193--231}}
 
 @INCOLLECTION{ds:lmpo-conv,
   author = {Day, Brian and Street, Ross},
@@ -5991,7 +5994,7 @@ journal = {Proceedings of the London Mathematical Society}
   author = {Sharon Hollander},
   title = {A Homotopy Theory for Stacks},
   year = {2001},
-  eprint = {arXiv:math.AT/0110247}
+  note = {arXiv:math.AT/0110247}
 }
 
 @MISC{holmes:rieger-fafa-review,
@@ -9925,7 +9928,7 @@ MRREVIEWER = {Fernando Muro},
   mrreviewer = {Ioan Tofan}
 }
 
-@ARTICLE{MR1900904,
+@ARTICLE{menni:more-ex-top,
   author = {Menni, Mat{\'{\i}}as},
   title = {More exact completions that are toposes},
   journal = {Ann. Pure Appl. Logic},
@@ -16025,12 +16028,15 @@ author = "Roy Dyckhoff and Walter Tholen"
     publisher = {ACM Press}
 }
 
-@Unpublished{klv:ssetmodel,
-  shorthand = {KL(V)19},
-  author = 	 {Chris Kapulkin and Peter LeFanu Lumsdaine},
-  title = 	 {The Simplicial Model of Univalent Foundations (after {Voevodsky})},
-  note = 	 {To appear in {\em Journal of the European Mathematical Society}.  arXiv:1211.2851},
-  year = 	 2019}
+@article{klv:ssetmodel,
+    author = {Kapulkin, Chris and Lumsdaine, Peter LeFanu},
+    title = {The simplicial model of univalent foundations (after {V}oevodsky)},
+    shorthand = {KL(V)19},
+    year = {2019},
+    journal = {Journal of the European Mathematical Society},
+    note = {To appear.  arXiv:1211.2851},
+    eprint = {1211.2851},
+}
 
 @inproceedings{lh:canonicity,
  author = {Licata, Daniel R. and Harper, Robert},
@@ -18208,9 +18214,10 @@ author = "Krzysztof Kapulkin and Peter LeFanu Lumsdaine",
 @InCollection{shulman:logicofspace,
   author = 	 {Michael Shulman},
   title = 	 {Homotopy type theory: the logic of space},
-  booktitle = 	 {New spaces for mathematics and physics},
-  year = 	 2016,
+  booktitle = 	 {New Spaces in Mathematics and Physics: Volume I -- New Spaces in Mathematics},
+  year = 	 2019,
   editor = 	 {Gabriel Catren and Mathieu Anel},
+	publisher = 	 {Cambridge University Press},
   note = 	 {To appear.  arXiv:1703.03007}}
 
 @Article{penon:thesis,
@@ -20296,6 +20303,14 @@ note = {arXiv:1602.07502},
   month = 	 {Apr},
   year = 	 2018}
 
+@Misc{licata:fibdtttalk,
+  author = 	 {Dan Licata},
+  title = 	 {A Fibrational Framework for Substructural and Modal Dependent Type Theories},
+  howpublished = {Talk at Homotopy Type Theory Electronic Seminar},
+  note = 	 {Video and slides available at \url{http://uwo.ca/math/faculty/kapulkin/seminars/hottest.html}},
+  month = 	 {March},
+  year = 	 2019}
+
 @Misc{lumsdaine:gendeftt-talk,
   author = 	 {Peter LeFanu Lumsdaine},
   title = 	 {A general definition of dependent type theories},
@@ -20516,6 +20531,12 @@ isbn="978-3-540-31429-5"
 	title = 			 {Higher inductive types via impredicative polymorphism},
 	note = 				 {\url{https://homotopytypetheory.org/2011/04/25/higher-inductive-types-via-impredicative-polymorphism/}},
 	year = 		 2011}
+
+@Unpublished{shulman:hit-impred-blog-3,
+	author = 			 {Michael Shulman},
+	title = 			 {Impredicative encodings, part 3},
+	note = 				 {\url{https://homotopytypetheory.org/2018/11/26/impredicative-encodings-part-3/}},
+	year = 		 2018}
 
 @Unpublished{kl:hoinvdia,
 	author = 			 {Chris Kapulkin, Peter LeFanu Lumsdaine},
@@ -21049,7 +21070,7 @@ MRREVIEWER = {John F. Oprea},
 @Unpublished{shulman:univinj,
 	author = 			 {Michael Shulman},
 	title = 			 {All $(\infty,1)$-toposes have strict univalent universes},
-	note = 				 {In preparation},
+	note = 				 {arXiv:1904.07004},
 	year = 		 2019}
 
 @article {kr:transfinite,
@@ -21269,6 +21290,142 @@ Year = {2018},
 note = {arXiv:1810.09367},
 }
 
+@PhdThesis{menni:thesis,
+	author = 			 {Menni, {Mat{\'{\i}}as}},
+	title = 			 {Exact completions and toposes},
+	school = 			 {University of Edinburgh},
+	year = 				 2000}
+
+@Article{menni:clop-ex,
+	author = 			 {Menni, {Mat{\'{\i}}as}},
+	title = 			 {Closure operators in exact completions},
+	journal = 		 {Theory and Applications of Categories},
+	year = 				 2001,
+	number = 	 21,
+	volume = 			 {8},
+	pages = 		 {522--540}}
+
+@Article{mr:unif-excplt,
+author="Maietti, Maria Emilia and Rosolini, Giuseppe",
+title="Unifying Exact Completions",
+journal="Applied Categorical Structures",
+year="2015",
+month="Feb",
+day="01",
+volume="23",
+number="1",
+pages="43--52",
+issn="1572-9095",
+doi="10.1007/s10485-013-9360-5",
+}
+
+@Article{mr:elem-quot-cplt,
+	author = 			 {Maietti, Maria Emilia and Rosolini, Giuseppe},
+	title = 			 {Elementary quotient completion},
+	journal = 		 {Theory and Applications of Categories},
+	year = 				 2013,
+	volume = 	 27,
+	number = 	 17,
+	pages = 		 {445--463}}
+
+@unpublished{mpr:eqc-ct-pass,
+Author = {Maria Emilia Maietti and Fabio Pasquali and Giuseppe Rosolini},
+Title = {Elementary Quotient Completions, {Church's} Thesis, and Partioned Assemblies},
+Year = {2018},
+note = {arXiv:1802.06400},
+}
+
+@article{pasquali:tripos-to-topos,
+    AUTHOR = {Pasquali, Fabio},
+     TITLE = {Remarks on the tripos to topos construction: comprehension,
+              extensionality, quotients and functional-completeness},
+   JOURNAL = {Appl. Categ. Structures},
+  FJOURNAL = {Applied Categorical Structures. A Journal Devoted to
+              Applications of Categorical Methods in Algebra, Analysis,
+              Order, Topology and Computer Science},
+    VOLUME = {24},
+      YEAR = {2016},
+    NUMBER = {2},
+     PAGES = {105--119},
+      ISSN = {0927-2852},
+       DOI = {10.1007/s10485-014-9388-1},
+}
+
+@Unpublished{lurie:sag,
+	author = 			 {Jacob Lurie},
+	title = 			 {Spectral algebraic geometry},
+	note = 				 {\url{http://math.harvard.edu/~lurie/papers/SAG-rootfile.pdf}}}
+
+@article{jfs:twqft,
+    AUTHOR = {Johnson-Freyd, Theo and Scheimbauer, Claudia},
+     TITLE = {({O}p)lax natural transformations, twisted quantum field
+              theories, and ``even higher'' {M}orita categories},
+   JOURNAL = {Adv. Math.},
+  FJOURNAL = {Advances in Mathematics},
+    VOLUME = {307},
+      YEAR = {2017},
+     PAGES = {147--223},
+      ISSN = {0001-8708},
+       DOI = {10.1016/j.aim.2016.11.014},
+}
+
+@unpublished{lomonaco:1inacc,
+Author = {Giulio Lo Monaco},
+Title = {Dependent products and 1-inaccessible universes},
+Year = {2019},
+note = {arXiv:1905.10220},
+}
+
+@article{hj:factsys-fib,
+title = "Factorization systems and fibrations: Toward a fibred Birkhoff variety theorem",
+journal = "Electronic Notes in Theoretical Computer Science",
+volume = "69",
+pages = "156 - 182",
+year = "2003",
+note = "CTCS'02, Category Theory and Computer Science",
+issn = "1571-0661",
+doi = "https://doi.org/10.1016/S1571-0661(04)80564-4",
+author = "Jesse Hughes and Bart Jacobs",
+}
+
+@PhdThesis{nester:thesis,
+	author = 			 {Chad Nester},
+	title = 			 {Turing Categories and Realizability},
+	school = 			 {University of Calgary},
+	year = 				 2017}
+
+@unpublished{vdb:pred-topos,
+Author = {Benno van den Berg},
+Title = {Predicative toposes},
+Year = {2012},
+note = {arXiv:1207.0959},
+}
+
+@unpublished{frey:char-realiz,
+Author = {Jonas Frey},
+Title = {Characterizing partitioned assemblies and realizability toposes},
+Year = {2014},
+note = {arXiv:1404.6997},
+}
+
+@article{gcst:sprop,
+  TITLE = {Definitional Proof-Irrelevance without {K}},
+  AUTHOR = {Gilbert, Ga{\"e}tan and Cockx, Jesper and Sozeau, Matthieu and Tabareau, Nicolas},
+  URL = {https://hal.inria.fr/hal-01859964},
+  JOURNAL = {Proceedings of the ACM on Programming Languages},
+  HAL_LOCAL_REFERENCE = {ACL+},
+  HAL_LOCAL_REFERENCE = {BEST},
+  PUBLISHER = {{ACM}},
+  SERIES = {POPL'19},
+  PAGES = {1-28},
+  YEAR = {2019},
+  MONTH = Jan,
+  DOI = {10.1145/329031610.1145/3290316},
+  PDF = {https://hal.inria.fr/hal-01859964/file/main_popl.pdf},
+  HAL_ID = {hal-01859964},
+  HAL_VERSION = {v2},
+}
+
 @Unpublished{coquand:pshf-model,
 	author = 			 {Thierry Coquand},
 	title = 			 {Presheaf model of type theory},
@@ -21287,4 +21444,211 @@ Author = {Andrew Swan},
 Title = {W-Types with Reductions and the Small Object Argument},
 Year = {2018},
 note = {arXiv:1802.07588},
+}
+
+@article {gonthier:4color,
+    AUTHOR = {Gonthier, Georges},
+     TITLE = {Formal proof---the four-color theorem},
+   JOURNAL = {Notices Amer. Math. Soc.},
+  FJOURNAL = {Notices of the American Mathematical Society},
+    VOLUME = {55},
+      YEAR = {2008},
+    NUMBER = {11},
+     PAGES = {1382--1393},
+      ISSN = {0002-9920},
+   MRCLASS = {05C15 (68T15)},
+  MRNUMBER = {2463991},
+MRREVIEWER = {Solomon Marcus},
+}
+
+@InProceedings{odd-order,
+author="Gonthier, Georges
+and Asperti, Andrea
+and Avigad, Jeremy
+and Bertot, Yves
+and Cohen, Cyril
+and Garillot, Fran{\c{c}}ois
+and Le Roux, St{\'e}phane
+and Mahboubi, Assia
+and O'Connor, Russell
+and Ould Biha, Sidi
+and Pasca, Ioana
+and Rideau, Laurence
+and Solovyev, Alexey
+and Tassi, Enrico
+and Th{\'e}ry, Laurent",
+editor="Blazy, Sandrine
+and Paulin-Mohring, Christine
+and Pichardie, David",
+title="A Machine-Checked Proof of the Odd Order Theorem",
+booktitle="Interactive Theorem Proving",
+year="2013",
+publisher="Springer Berlin Heidelberg",
+address="Berlin, Heidelberg",
+pages="163--179",
+isbn="978-3-642-39634-2"
+}
+
+@Article{manin-interview,
+	author = 			 {Mikhail Gelfand},
+	title = 			 {We Do Not Choose Mathematics as Our Profession, It Chooses Us: Interview with Yuri Manin},
+	journal = 		 {Notices of the American Mathematical Society},
+	year = 				 2009,
+	volume = 	 56,
+	number = 	 10}
+
+@Book{nps:prog-mltt,
+	author = 	 {Bengt Nordstr{\"o}m and Kent Petersson and Jan M. Smith},
+	title = 			 {Programming in {Martin-L{\"o}f's} type theory},
+	publisher = 	 {Oxford University Press},
+	year = 				 1990,
+	note = 		 {Available at \url{http://www.cse.chalmers.se/research/group/logic/book/book.pdf}}}
+
+@PhdThesis{vergura:thesis,
+	author = 			 {Marco Vergura},
+	title = 			 {Localization theory in an $(\infty,1)$-topos},
+	school = 			 {University of Western Ontario},
+	year = 				 2019}
+
+@article {roberts:wisc,
+    AUTHOR = {Roberts, David Michael},
+     TITLE = {The weak choice principle {WISC} may fail in the category of
+              sets},
+   JOURNAL = {Studia Logica},
+  FJOURNAL = {Studia Logica. An International Journal for Symbolic Logic},
+    VOLUME = {103},
+      YEAR = {2015},
+    NUMBER = {5},
+     PAGES = {1005--1017},
+      ISSN = {0039-3215},
+   MRCLASS = {03E25 (03E35 03G30 18B05)},
+  MRNUMBER = {3386138},
+MRREVIEWER = {Thomas Streicher},
+       DOI = {10.1007/s11225-015-9603-6},
+       URL = {https://doi.org/10.1007/s11225-015-9603-6},
+}
+
+@InProceedings{kk:hiits,
+  author =	{Ambrus Kaposi and Andr{\'a}s Kov{\'a}cs},
+  title =	{{A Syntax for Higher Inductive-Inductive Types}},
+  booktitle =	{3rd International Conference on Formal Structures for  Computation and Deduction (FSCD 2018)},
+  pages =	{20:1--20:18},
+  series =	{Leibniz International Proceedings in Informatics (LIPIcs)},
+  ISBN =	{978-3-95977-077-4},
+  ISSN =	{1868-8969},
+  year =	{2018},
+  volume =	{108},
+  editor =	{H{\'e}l{\`e}ne Kirchner},
+  publisher =	{Schloss Dagstuhl--Leibniz-Zentrum fuer Informatik},
+  address =	{Dagstuhl, Germany},
+  URL =		{http://drops.dagstuhl.de/opus/volltexte/2018/9190},
+  URN =		{urn:nbn:de:0030-drops-91906},
+  doi =		{10.4230/LIPIcs.FSCD.2018.20},
+  annote =	{Keywords: homotopy type theory, inductive-inductive types, higher inductive types, quotient inductive types, logical relations}
+}
+
+@unpublished{uemura:cubical-asm,
+Author = {Taichi Uemura},
+Title = {Cubical Assemblies and the Independence of the Propositional Resizing Axiom},
+Year = {2018},
+note = {arXiv:1803.06649},
+}
+
+@unpublished{su:ct-cubasm,
+Author = {Andrew Swan and Taichi Uemura},
+Title = {On {Church's} Thesis in Cubical Assemblies},
+Year = {2019},
+note = {arXiv:1905.03014},
+}
+
+@PhdThesis{reitz:thesis,
+	author = 			 {Jonas Reitz},
+	note = 				 {arXiv:0609064},
+	title = 			 {The ground axiom},
+	school = 			 {The City University of New York},
+	year = 				 2008}
+
+@book {friedman:fscf,
+    AUTHOR = {Friedman, Sy D.},
+     TITLE = {Fine structure and class forcing},
+    SERIES = {De Gruyter Series in Logic and its Applications},
+    VOLUME = {3},
+ PUBLISHER = {Walter de Gruyter \& Co., Berlin},
+      YEAR = {2000},
+     PAGES = {x+221},
+      ISBN = {3-11-016777-8},
+   MRCLASS = {03-02 (03E15 03E35 03E45 03E55)},
+  MRNUMBER = {1780138},
+MRREVIEWER = {A. Kanamori},
+       DOI = {10.1515/9783110809114},
+       URL = {https://doi.org/10.1515/9783110809114},
+}
+
+@Misc{roberts:classforcing,
+	author = 	 {David Michael Roberts},
+	title = 		 {Class forcing and topos theory},
+	year = 		 2018,
+	note = 		 {Notes from a talk at IHES},
+	doi = 				 {10.4225/55/5b2252e3092af}}
+
+@Misc{frey:mfpo-pca,
+  author = 	 {Jonas Frey},
+  title = 	 {Multiform preorders and partial combinatory algebras},
+  howpublished = {\url{http://li2012.univ-mrs.fr/media/talk81/frey-talk.pdf}},
+  month = 	 {February},
+  year = 	 2012}
+
+@Unpublished{zwanziger:natmod-comnd,
+	author = 			 {Colin Zwanziger},
+	title = 			 {Natural model semantics of comonadic modal type theory},
+	note = 				 {In preparation},
+	year = 		 2019}
+
+@unpublished{ky:maghom-ordcplx,
+Author = {Ryuki Kaneta and Masahiko Yoshinaga},
+Title = {Magnitude homology of metric spaces and order complexes},
+Year = {2018},
+note = {arXiv:1803.04247},
+}
+
+@unpublished{jubin:maghom,
+Author = {Beno{\^\i}t Jubin},
+Title = {On the magnitude homology of metric spaces},
+Year = {2018},
+note = {arXiv:1803.05062},
+}
+
+@unpublished{gomi:magcplx,
+Author = {Kiyonori Gomi},
+Title = {Smoothness filtration of the magnitude complex},
+Year = {2018},
+note = {arXiv:1809.06593},
+}
+
+@unpublished{gomi:maghom-geodesic,
+Author = {Kiyonori Gomi},
+Title = {Magnitude homology of geodesic space},
+Year = {2019},
+note = {arXiv:1902.07044},
+}
+
+@unpublished{asao:maghom-geodesic,
+Author = {Yasuhiko Asao},
+Title = {Magnitude homology of geodesic metric spaces with an upper curvature bound},
+Year = {2019},
+note = {arXiv:1903.11794},
+}
+
+@unpublished{otter:mag-pers,
+Author = {Nina Otter},
+Title = {Magnitude meets persistence. Homology theories for filtered simplicial sets},
+Year = {2018},
+note = {arXiv:1807.01540},
+}
+
+@unpublished{hepworth:mag-cohom,
+Author = {Richard Hepworth},
+Title = {Magnitude cohomology},
+Year = {2018},
+note = {arXiv:1807.06832},
 }
