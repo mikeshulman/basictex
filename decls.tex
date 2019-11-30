@@ -525,9 +525,6 @@
 \newcommand{\ulpullback}[1][ul]{\ar[#1,phantom,near start,"\ulcorner"]}
 
 
-%% TODO: This \autoref in TAC doesn't work with figures (and anything
-%% else other than theorems).
-
 %%%% THEOREM-TYPE ENVIRONMENTS, hacked to
 %%% (a) number all with the same numbers, and
 %%% (b) have the right names.
@@ -552,11 +549,13 @@
   \let\@defthm\newtheorem
   \def\switchtotheoremrm{\let\@defthm\newtheoremrm}
   \def\defthm#1#2#3{\@defthm{#1}{#2}} % Ignore the third argument (for cleveref only)
-  % The following allows us to use \cref for sections too, as if it
-  % were cleveref.  (But not for subsections, and also not for
+  % The following allows us to use \cref for sections and figures too,
+  % as if it were cleveref.  (But not for subsections, and also not for
   % multiple references at once.)
   \let\your@section\section
   \def\section{\gdef\currthmtype{section}\your@section}
+  \let\your@figure\figure
+  \def\figure{\gdef\currthmtype{Figure}\your@figure}
   % Start out \currthmtype as empty
   \def\currthmtype{}
   % In a bit, we're going to redefine \label so that \label{athm} will
@@ -581,7 +580,6 @@
         \old@label{label@name@#1}}%
       \old@label{#1}}
   }
-  % TODO: This doesn't work for references to figures!
   \let\cref\autoref
 \else\ifcref
   % Cleveref does most of it for us.
