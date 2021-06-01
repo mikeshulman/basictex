@@ -1,5 +1,8 @@
 \usepackage{amssymb,amsmath,stmaryrd,mathrsfs}
 
+% This is a generally good thing to do (https://tex.stackexchange.com/q/664/535), but make sure that the package cm-super is installed (https://tex.stackexchange.com/a/1293/535) or it will make bad-looking PDFs with bitmap (type 3) fonts.
+\usepackage[T1]{fontenc}
+
 %% Set this to true before loading if we're using the TAC style file.
 %% Note that eventually, TAC requires everything to be in one source file.
 \def\definetac{\newif\iftac}    % Can't define a \newif inside another \if!
