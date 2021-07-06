@@ -557,6 +557,8 @@
   % multiple references at once.)
   \let\your@section\section
   \def\section{\gdef\currthmtype{section}\your@section}
+  \let\your@subsection\subsection
+  \def\subsection{\gdef\currthmtype{subsection}\your@subsection}
   \let\your@figure\figure
   \def\figure{\gdef\currthmtype{Figure}\your@figure}
   % Start out \currthmtype as empty
