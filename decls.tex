@@ -711,6 +711,26 @@
   \crefname{figure}{Figure}{Figures}
 \fi
 
+% Knowledge package
+\usepackage[quotation,protect quotation=tikzcd,notion]{knowledge}
+% Hack the knowledge "notion" command to introduce things in boldface
+\ifKnowledgePaperMode
+  \knowledgestyle*{intro notion}{boldface}
+\fi
+\ifKnowledgeCompositionMode
+  \ifXcolor
+    \knowledgestyle*{intro notion}{boldface,color={blue}}
+  \else
+    \knowledgestyle*{intro notion}{boldface, underline}
+  \fi
+\fi
+\ifKnowledgeElectronicMode
+  \ifXcolor
+    \knowledgestyle*{intro notion}{boldface,color={blue}}
+  \else
+    \knowledgestyle*{intro notion}{boldface, underline}
+ \fi
+\fi
 
 % \qedhere for TAC
 \iftac
