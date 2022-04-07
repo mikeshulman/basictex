@@ -539,6 +539,8 @@
 \newif\ifhyperref
 \@ifpackageloaded{hyperref}{\hyperreftrue}{\hyperreffalse}
 \iftac
+% TODO: In TAC style, \currthmtype isn't getting set by the theorem environments.  They need to be a \your@thing *followed* by a \gdef\currthmtype{#2}.
+
   %% In the TAC style, all theorems are actually subsections.  So
   %% the hyperref \autoref doesn't work and we have to use our own code
   %% in any case.  We also have to hook into the \state macros instead
@@ -552,9 +554,9 @@
   \let\@defthm\newtheorem
   \def\switchtotheoremrm{\let\@defthm\newtheoremrm}
   \def\defthm#1#2#3{\@defthm{#1}{#2}} % Ignore the third argument (for cleveref only)
-  % The following allows us to use \cref for sections and figures too,
-  % as if it were cleveref.  (But not for subsections, and also not for
-  % multiple references at once.)
+  % The following allows us to use \cref for sections, subsections,
+  % and figures too, as if it were cleveref.  (But not for multiple
+  % references at once.)
   \let\your@section\section
   \def\section{\gdef\currthmtype{section}\your@section}
   \let\your@subsection\subsection
