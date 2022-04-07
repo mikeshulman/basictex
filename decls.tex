@@ -460,6 +460,20 @@
 \def\biggsh{\shvar{\bigg}}
 \def\Biggsh{\shvar{\Bigg}}
 
+%% Paul Taylor: noncommutative diagrams
+\def\puncture{
+  \begingroup
+  \setbox0\hbox{A}%
+  \vrule height.53\ht0 depth-.47\ht0 width.35\ht0
+  \kern .12\ht0
+  \vrule height\ht0 depth-.65\ht0 width.06\ht0
+  \kern-.06\ht0
+  \vrule height.35\ht0 depth0pt width.06\ht0
+  \kern .12\ht0
+  \vrule height.53\ht0 depth-.47\ht0 width.35\ht0
+  \endgroup
+}
+
 % TYPING JUDGMENTS
 % Call this macro as \jd{x:A, y:B |- c:C}.  It adds (what I think is)
 % appropriate spacing, plus auto-sized parentheses around each typing judgment.
@@ -699,6 +713,26 @@
   \crefname{figure}{Figure}{Figures}
 \fi
 
+% Knowledge package
+\usepackage[quotation,protect quotation=tikzcd,notion]{knowledge}
+% Hack the knowledge "notion" command to introduce things in boldface
+\ifKnowledgePaperMode
+  \knowledgestyle*{intro notion}{boldface}
+\fi
+\ifKnowledgeCompositionMode
+  \ifXcolor
+    \knowledgestyle*{intro notion}{boldface,color={blue}}
+  \else
+    \knowledgestyle*{intro notion}{boldface, underline}
+  \fi
+\fi
+\ifKnowledgeElectronicMode
+  \ifXcolor
+    \knowledgestyle*{intro notion}{boldface,color={blue}}
+  \else
+    \knowledgestyle*{intro notion}{boldface, underline}
+ \fi
+\fi
 
 % \qedhere for TAC
 \iftac
